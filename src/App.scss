@@ -4,6 +4,13 @@ body {
   color: #fff;
 }
 
+button {
+  &[disabled] {
+    opacity: .6;
+    pointer-events: none;
+  }
+}
+
 .App {
   text-align: center;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './components/header/header';
-import List from './components/list/list';
 import './App.scss';
 import Contact from "./components/todo/todo";
 import News from "./components/news/news";
@@ -9,15 +8,14 @@ import {BrowserRouter, Route} from "react-router-dom/";
 
 
 
-function App(props) {
+function App() {
     // debugger;
   return (
       <BrowserRouter>
         <div className="App">
             <Header/>
-            <List/>
             <main>
-                <Route path='/Contact' component={Contact}/>
+                <Route path='/Todo' component={Contact}/>
                 <Route path='/News' component={News}/>
                 <Route path='/Home' component={Home}/>
             </main>

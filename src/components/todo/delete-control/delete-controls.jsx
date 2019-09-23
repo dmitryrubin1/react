@@ -1,13 +1,13 @@
 import React from 'react'
 import CloseIcon from '@material-ui/icons/Close';
 
-class DeleteItem extends React.Component {
+class DeleteControl extends React.Component {
 
     render() {
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <button
-                disabled={this.props.disabledDelete}
+                disabled={!this.props.disabledDelete}
                 onClick={this.props.deleteItem}>
                 <CloseIcon/>
             </button>
@@ -15,4 +15,4 @@ class DeleteItem extends React.Component {
     }
 }
 
-export default DeleteItem
+export default DeleteControl

@@ -1,10 +1,10 @@
 import React from 'react'
 import PauseIcon from '@material-ui/icons/Pause';
 
-class EditItem extends React.Component {
+class OnHoldControl extends React.Component {
 
     render() {
-    // console.log(this.props);
+    console.log(this.props);
         return (
             <button onClick={this.props.onHold}>
                 <PauseIcon/>
@@ -13,4 +13,4 @@ class EditItem extends React.Component {
     }
 }
 
-export default EditItem
+export default OnHoldControl

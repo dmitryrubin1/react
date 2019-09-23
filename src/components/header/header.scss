@@ -17,10 +17,13 @@ menu {
   padding: 0;
 
   ul {
+    padding: 0;
+    margin: 0;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    list-style: none;
 
     li {
       cursor: pointer;

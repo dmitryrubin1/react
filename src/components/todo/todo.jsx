@@ -43,7 +43,7 @@ class Todo extends React.Component {
     }
 
     onHoldItem() {
-        console.log(!!this.state.onHold);
+        // console.log(!!this.state.onHold);
         this.setState({
             onHold: !this.state.onHold,
         });
@@ -64,7 +64,7 @@ class Todo extends React.Component {
 
                     <Item items={item}
                           key={index}
-                          deleteItems={this.deleteItems.bind(this)}
+                          onDeleteItems={this.deleteItems.bind(this)}
                           onHold={this.onHoldItem.bind(this)}
                           // doneItem={this.checkedBox.bind(this)}
                           onHoldClass={this.state.onHold}

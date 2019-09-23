@@ -1,10 +1,10 @@
 import React from 'react'
-import DeleteItem from "../delete-item/delete-item";
+import DeleteControl from "../delete-control/delete-controls";
 import ChoiceItem from "../choice-item/choice-item";
-import EditItem from "../edit-controls/edit-contols";
+import OnHoldControl from "../onHold-control/onHold-contols";
 
 class Item extends React.Component {
-
+    /*нужно ли в каждом компоненте присваивать переменную пропсам и стейту типо const item = this.props и дальше использовать ее item.close например*/
 
     constructor(props) {
         super(props)
@@ -14,7 +14,6 @@ class Item extends React.Component {
             onHold: this.props.onHoldClass,
             closed: false
         }
-
     }
 
     checkedBox(event) {
@@ -36,12 +35,11 @@ class Item extends React.Component {
                         : (<span><strike>{this.props.items}</strike></span>)
                     }
                     <div className="controls">
-                        {/*не пойму как я могу воспользоваться  сменой статуса*/}
-                        <EditItem onHold={this.props.onHold}/>
-                        {/*вот тут надо понять как пропсами передавать функции что куда*/}
-                        <DeleteItem
+                        <OnHoldControl onHold={this.props.onHold}/>
+                        {/*понять как пропсами передавать функции что куда*/}
+                        <DeleteControl
                             disabledDelete={this.state.closed}
-                            deleteItem={this.props.deleteItems}/>
+                            deleteItem={this.props.onDeleteItems}/>
                     </div>
                 </div>
             </div>
