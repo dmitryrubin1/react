@@ -9,8 +9,6 @@ class Todo extends React.Component {
         this.state = {
             items: [],
             name: "",
-            closed: false,
-            onHold: false
         }
     }
 
@@ -33,19 +31,11 @@ class Todo extends React.Component {
     }
 
     deleteItems(e) {
-        console.log('deleteItems');
         e.preventDefault();
         this.setState({
             // удаляет с начала массива а не тот на который кликаю
             items: [...this.state.items].splice(1),
             name: '',
-        });
-    }
-
-    onHoldItem() {
-        // console.log(!!this.state.onHold);
-        this.setState({
-            onHold: !this.state.onHold,
         });
     }
 
@@ -65,9 +55,6 @@ class Todo extends React.Component {
                     <Item items={item}
                           key={index}
                           onDeleteItems={this.deleteItems.bind(this)}
-                          onHold={this.onHoldItem.bind(this)}
-                          // doneItem={this.checkedBox.bind(this)}
-                          onHoldClass={this.state.onHold}
                     />
                 )}
 
@@ -78,15 +65,16 @@ class Todo extends React.Component {
                 */}
 
                 {itemLength
-                    ? (< ErrorMessage class='success' text={'write you next item'}/>)
+                    ? (<ErrorMessage class='success' text={'write you next item'}/>)
                     : (<ErrorMessage class='error' text={'you list is empty'}/>)
                 }
 
                 <form className="contact-form" onSubmit={this.onSubmit}>
                     <input
-                        placeholder={this.state.name}
-                        value={this.state.name} type="text"
                         onChange={this.onChangeWhere}
+                        placeholder={this.state.name}
+                        value={this.state.name}
+                        type="text"
                     />
                     <div className="btn-group">
                         <button disabled={!this.state.name}>{!this.state.name ? 'Заблокировано' : 'Отправить'}</button>

@@ -13,6 +13,7 @@ class ChoiceItem extends React.Component {
                 <input
                     type='checkbox'
                     onChange={this.props.checkedItem}
+                    disabled={this.props.disabledCheck}
                 />
             </div>
         )

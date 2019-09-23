@@ -8,34 +8,43 @@ class Item extends React.Component {
 
     constructor(props) {
         super(props)
-        console.log(this.props)
+        console.log('item');
+        console.log(this.props);
 
         this.state = {
-            onHold: this.props.onHoldClass,
+            onHold: false,
             closed: false
         }
     }
 
     checkedBox(event) {
-        console.log(!this.state.closed);
         this.setState({
-            closed: !this.state.closed
+            closed: !this.state.closed,
         })
+    }
+
+    onHoldItem(func) {
+        this.setState({
+            onHold: !this.state.onHold,
+        });
     }
 
     render() {
         return (
             <div>
-                <div className={`todo-item ${this.props.onHoldClass ? 'onHold' : ''}`}>
-
-                    <ChoiceItem checkedItem={this.checkedBox.bind(this)}/>
+                <div className={`todo-item ${this.state.onHold ? 'onHold' : ''}`}>
+                    <ChoiceItem
+                        disabledCheck={this.state.onHold}
+                        checkedItem={this.checkedBox.bind(this)}/>
                     {/*изначально стэйт фолс, по событию меняю на противоположный в функции, и в условии обратно*/}
                     {!this.state.closed
                         ? (<span>{this.props.items}</span>)
                         : (<span><strike>{this.props.items}</strike></span>)
                     }
                     <div className="controls">
-                        <OnHoldControl onHold={this.props.onHold}/>
+                        <OnHoldControl
+                            onHold={this.onHoldItem.bind(this)}
+                            disabledOnHold={this.state.closed}/>
                         {/*понять как пропсами передавать функции что куда*/}
                         <DeleteControl
                             disabledDelete={this.state.closed}
