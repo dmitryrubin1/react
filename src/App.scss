@@ -1,0 +1,188 @@
+
+body {
+  background-color: #282c34;
+  color: #fff;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+  pointer-events: none;
+}
+
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.contact-form {
+
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+
+  > * {
+    margin-bottom: 20px;
+    min-height: 54px;
+    border-radius: 6px;
+    outline: none;
+    border: 0;
+
+  }
+
+  input, textarea {
+    padding: 0 12px;
+  }
+
+  .btn-group {
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+      width: 110px;
+    }
+  }
+}
+
+.news {
+  width: 960px;
+  margin: 20px auto;
+
+  &-item {
+    border: 1px solid #cecece;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    background: #CCFFFA;
+    text-align: left;
+
+    a {
+      color: #282c34;
+      text-decoration: none;
+    }
+
+    .author {
+      display: block;
+      margin-bottom: 10px;
+      text-align: left;
+    }
+
+    .text {
+
+    }
+
+    .date {
+      text-align: right;
+      margin-top: 10px;
+    }
+  }
+
+  &-form {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    height: 349px;
+    margin: 0 auto;
+
+    > * {
+      margin-bottom: 10px;
+    }
+
+    input, textarea {
+      min-height: 42px;
+      border-radius: 4px;
+      border: 0;
+      padding: 8px;
+    }
+  }
+}
+
+.todo-item {
+  display: flex;
+  position: relative;
+  width: 300px;
+  margin: 10px auto;
+  height: 40px;
+  border-radius: 4px;
+  padding: 4px 12px;
+  background: #fefafc;
+  color: #282c33;
+  line-height: 40px;
+  text-align: left;
+  border: 2px solid transparent;
+
+  &.onHold {
+    border: 2px solid burlywood;
+    background: #DECDB5;
+    
+  }
+
+  span {
+    display: block;
+    margin-left: 10px;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    margin-right: auto;
+    color: grey;
+
+    button {
+      display: block;
+      text-align: center;
+      line-height: 30px;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      font-size: 16px;
+      text-decoration: none;
+      color: #1f3330;
+
+
+      &:hover {
+        cursor: pointer;
+        color: #282c33;
+      }
+    }
+  }
+}
+
+.message {
+  font-weight: bold;
+  margin-top: 50px;
+
+  &.error {
+    color: red;
+  }
+
+  &.success {
+    color: palegreen;
+  }
+}
+
+.counter-item {
+  display: block;
+  position: absolute;
+  left: 12px;
+}
