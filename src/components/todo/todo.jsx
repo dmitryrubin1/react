@@ -9,6 +9,8 @@ class Todo extends React.Component {
         this.state = {
             items: [],
             name: "",
+            onHold: false,
+            closed: false
         }
     }
 
@@ -24,13 +26,13 @@ class Todo extends React.Component {
 
         if (emptyInput) {
             this.setState({
-                items: [...this.state.items, this.state.name]
+                items: [...this.state.items, this.state.name],
+                name: ''
             })
         }
-        this.state.name = ""
     }
 
-    deleteItems(e) {
+    deleteItems = (e) => {
         e.preventDefault();
         this.setState({
             // удаляет с начала массива а не тот на который кликаю
@@ -39,7 +41,20 @@ class Todo extends React.Component {
         });
     }
 
-    render() {
+    checkedBox = (check) => {
+        check.preventDefault();
+        this.setState({
+            closed: !this.state.closed,
+        })
+    };
+
+    onHoldItem = () => {
+        this.setState({
+            onHold: !this.state.onHold
+        });
+    };
+
+    render () {
         const itemLength = this.state.items.length;
 
         return (
@@ -49,20 +64,16 @@ class Todo extends React.Component {
                     : (null)
                 }
 
-                {/*где этот цикл делать? внутри или снаружи */}
+                {/*т.е если функция стрелочная ей не нужен bing в класс?*/}
                 {this.state.items.map((item, index) =>
 
                     <Item items={item}
                           key={index}
-                          onDeleteItems={this.deleteItems.bind(this)}
+                          checkedItem={this.checkedBox}
+                          onHold={this.onHoldItem}
+                          onDeleteItems={this.deleteItems}
                     />
                 )}
-
-                {/*
-                   сохранять стэйт и пропсы в константу- переменную?
-                   где делать условие? внутри компонента? или снаружи?
-                   где определять переменную? в конструкторе через this?
-                */}
 
                 {itemLength
                     ? (<ErrorMessage class='success' text={'write you next item'}/>)
