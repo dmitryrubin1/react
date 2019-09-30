@@ -1,7 +1,6 @@
 import React from 'react';
 import './header.scss';
 import ItemMenu from './Item-menu';
-import Todo from "../todo/todo";
 
 function Header() {
 

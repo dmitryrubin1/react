@@ -9,6 +9,8 @@ class Todo extends React.Component {
         this.state = {
             items: [],
             name: "",
+            onHold: false,
+            checked: false
         }
     }
 
@@ -24,18 +26,35 @@ class Todo extends React.Component {
 
         if (emptyInput) {
             this.setState({
-                items: [...this.state.items, this.state.name]
+                items: [...this.state.items, this.state.name],
+                name: ""
             })
         }
-        this.state.name = ""
     }
 
-    deleteItems(e) {
+    deleteItem = (e) => {
         e.preventDefault();
         this.setState({
             // удаляет с начала массива а не тот на который кликаю
             items: [...this.state.items].splice(1),
             name: '',
+        });
+    }
+
+    checkedBox = (event) => {
+        console.log('checkedBox');
+        this.setState({
+            checked: !this.state.checked
+        },
+        () => {
+            console.log(this.state.checked);
+        })
+    }
+
+    onHoldItem = (func) => {
+        console.log(func);
+        this.setState({
+            onHold: !this.state.onHold,
         });
     }
 
@@ -54,15 +73,11 @@ class Todo extends React.Component {
 
                     <Item items={item}
                           key={index}
-                          onDeleteItems={this.deleteItems.bind(this)}
+                          checkedItems={this.checkedBox}
+                          onHoldItems={this.onHoldItem}
+                          onDeleteItems={this.deleteItem}
                     />
                 )}
-
-                {/*
-                   сохранять стэйт и пропсы в константу- переменную?
-                   где делать условие? внутри компонента? или снаружи?
-                   где определять переменную? в конструкторе через this?
-                */}
 
                 {itemLength
                     ? (<ErrorMessage class='success' text={'write you next item'}/>)
