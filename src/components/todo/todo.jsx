@@ -41,20 +41,23 @@ class Todo extends React.Component {
         });
     }
 
-    checkedBox = (event) => {
-        console.log('checkedBox');
+    handleDataCallback = (choice) => {
         this.setState({
-            checked: !this.state.checked
+            checked: choice
         },
-        () => {
-            console.log(this.state.checked);
-        })
+            // result callback
+            () => {
+            console.log(this.state.checked, choice);
+        });
+
     }
 
     onHoldItem = (func) => {
-        console.log(func);
         this.setState({
-            onHold: !this.state.onHold,
+            onHold: func,
+        }, () => {
+            // и разный стейт компонентов, я возвращаю коллбеком func
+            console.log('parent state ' + this.state.checked,' , ', 'child state callback - ' + func)
         });
     }
 
@@ -68,12 +71,10 @@ class Todo extends React.Component {
                     : (null)
                 }
 
-                {/*где этот цикл делать? внутри или снаружи */}
                 {this.state.items.map((item, index) =>
-
                     <Item items={item}
                           key={index}
-                          checkedItems={this.checkedBox}
+                          checkedItem={this.handleDataCallback}
                           onHoldItems={this.onHoldItem}
                           onDeleteItems={this.deleteItem}
                     />

@@ -6,7 +6,6 @@ function Header() {
 
     return (
         <header className="header">
-            <h3>React</h3>
             <menu>
                 <ul>
                     <ItemMenu active='active' page='Home'/>
