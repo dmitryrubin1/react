@@ -49,7 +49,6 @@ class Todo extends React.Component {
             () => {
             console.log(this.state.checked, choice);
         });
-
     }
 
     onHoldItem = (func) => {

@@ -6,11 +6,6 @@ class Item extends React.Component {
     constructor(props) {
         super(props)
         console.log(this.props);
-
-        this.state = {
-            checked: false,
-            onHold: false
-        }
     }
 
     selectedItem = (event) => {
@@ -23,11 +18,18 @@ class Item extends React.Component {
         //Eсли использую setState в callback - приходит undefined и получается я использую стэйт внутренний
         //И получается что Item должен был быть stateless а получается что во всех условия я использую state
 
-        this.props.checkedItem(
-            this.setState({
-                checked: event.target.checked
-            })
-        )
+        // this.props.checkedItem(
+        //     this.setState({
+        //         checked: event.target.checked
+        //     })
+        // )
+
+
+        //даже если передаю на верх состояние, то как обновляются пропсы если компонент стэтлесс?
+        const checked = event.target.checked;
+        this.setState({checked}, ()=> {
+            this.props.checkedItem(checked);
+        })
     }
 
     pauseItem = (fn) => {
