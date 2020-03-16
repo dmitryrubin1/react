@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 class Input extends React.Component {
     constructor(props){
@@ -6,7 +6,7 @@ class Input extends React.Component {
         console.log(this.props);
 
         this.state = {
-            name: ''
+            name: ""
         }
     }
 

@@ -1,69 +1,55 @@
-import React from 'react'
-import PauseIcon from '@material-ui/icons/Pause';
-import CloseIcon from '@material-ui/icons/Close';
+import React from "react"
+import PauseIcon from "@material-ui/icons/Pause";
+import CloseIcon from "@material-ui/icons/Close";
 
 class Item extends React.Component {
+
     constructor(props) {
         super(props)
         console.log(this.props);
+
+        this.state = {
+            items: [],
+        }
     }
 
-    selectedItem = (event) => {
-
-        //Если использую callback, у родителя в консоле приходит значение стейта, но ругается линтер use setState
-        // и как вернуть props обратно в компонент?
-
-        // this.props.checkedItem(event.target.checked);
-
-        //Eсли использую setState в callback - приходит undefined и получается я использую стэйт внутренний
-        //И получается что Item должен был быть stateless а получается что во всех условия я использую state
-
-        // this.props.checkedItem(
-        //     this.setState({
-        //         checked: event.target.checked
-        //     })
-        // )
-
-
-        //даже если передаю на верх состояние, то как обновляются пропсы если компонент стэтлесс?
-        const checked = event.target.checked;
-        this.setState({checked}, ()=> {
-            this.props.checkedItem(checked);
+    childrenCheckItem = item => {
+        this.props.checkItem ({
+            checked: item.target.checked
         })
+
+
+        // here function
+        // console.log(this.props.checkItem);
+
+        // console.log(item.target.checked);
     }
 
-    pauseItem = (fn) => {
-        this.props.onHoldItems(this.state.onHold);
 
-        this.setState({
-            onHold: !this.state.onHold
+    deleteItem = item => {
+        this.props.deleteItemsProps({
+            items: [item, ...this.state.items]
         })
     }
 
     render() {
         return (
             <div>
-                <div className={`todo-item ${this.state.onHold ? 'onHold' : ''}`}>
+                <div id={this.props.id} className={"todo-item"}>
                     <input
-                        type='checkbox'
-                        onChange={this.selectedItem}
-                        disabled={this.state.onHold}
+                        type="checkbox"
+                        onChange={this.childrenCheckItem}
+                        defaultChecked={false}
                     />
-                    {!this.state.checked
-                        ? (<span>{this.props.items}</span>)
-                        : (<span><strike>{this.props.items}</strike></span>)
+                    {this.props.checkItem
+                        ? <span>{this.props.text}</span>
+                        : <span><strong>{this.props.text}</strong></span>
                     }
                     <div className="controls">
-                        <button
-                            onClick={this.pauseItem}
-                            disabled={this.state.checked}
-                        >
+                        <button onClick={this.pauseItem}>
                             <PauseIcon/>
                         </button>
-                        <button
-                            onClick={this.props.onDeleteItems}
-                            disabled={!this.state.checked}
-                        >
+                        <button onClick={() => this.deleteItem()}>
                             <CloseIcon/>
                         </button>
                     </div>

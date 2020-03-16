@@ -1,23 +1,21 @@
 import React from 'react';
 import Header from './components/header/header';
 import './App.scss';
-import Contact from "./components/todo/todo";
-import News from "./components/news/news";
-import Home from "./components/home/home";
+import Todo from "./components/todo/todo";
+import Tours from "./components/tours/Tours"
 import {BrowserRouter, Route} from "react-router-dom/";
-
-
+import CreateTour from "./components/tours/create-tour/Create-tour";
 
 function App() {
-    // debugger;
   return (
       <BrowserRouter>
         <div className="App">
             <Header/>
             <main>
-                <Route path='/Todo' component={Contact}/>
-                <Route path='/News' component={News}/>
-                <Route path='/Home' component={Home}/>
+                {/*<Route path='/News' component={News}/>*/}
+                <Route path='/Tours' component={Tours}/>
+                <Route path='/Todo' component={Todo}/>
+                <Route path='/create-tour' component={CreateTour}/>
             </main>
         </div>
       </BrowserRouter>

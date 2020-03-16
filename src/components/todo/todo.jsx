@@ -1,6 +1,6 @@
-import React from 'react';
-import ErrorMessage from "./message/error";
+import React from "react";
 import Item from "./item/item";
+import TodoForm from "./form/form";
 
 class Todo extends React.Component {
     constructor(props) {
@@ -8,93 +8,87 @@ class Todo extends React.Component {
 
         this.state = {
             items: [],
-            name: "",
-            onHold: false,
-            checked: false
+            button: false
         }
     }
 
-    onChangeWhere = (event) => {
+    enableTodoList = () => {
         this.setState({
-            name: event.target.value
+            button: !this.state.button
         })
     }
 
-    onSubmit = (event) => {
-        event.preventDefault();
-        const emptyInput = this.state.name.toString().length;
-
-        if (emptyInput) {
-            this.setState({
-                items: [...this.state.items, this.state.name],
-                name: ""
-            })
-        }
+    addItem = (item) => {
+        this.setState({
+            items: [item, ...this.state.items]
+        })
+        console.log(item);
     }
 
-    deleteItem = (e) => {
-        e.preventDefault();
+    handlerCheckedItem = (choice) => {
+        console.log(choice);
+
+        const checkedItem = this.state.items;
+        //
+
         this.setState({
-            // удаляет с начала массива а не тот на который кликаю
-            items: [...this.state.items].splice(1),
-            name: '',
-        });
+            items: checkedItem
+        })
+
+        console.log(checkedItem);
+        console.log(this.state);
     }
 
-    handleDataCallback = (choice) => {
+    handlerDeleteItems = (item) => {
         this.setState({
-            checked: choice
-        },
-            // result callback
-            () => {
-            console.log(this.state.checked, choice);
-        });
-    }
-
-    onHoldItem = (func) => {
-        this.setState({
-            onHold: func,
-        }, () => {
-            // и разный стейт компонентов, я возвращаю коллбеком func
-            console.log('parent state ' + this.state.checked,' , ', 'child state callback - ' + func)
+            items: [item, ...this.state.items],
+            name: "",
         });
     }
 
     render() {
-        const itemLength = this.state.items.length;
+        const stateTodo = this.state;
+        const itemLength = stateTodo.items.length;
+        const enabledStyle = {
+            color: "white",
+            fontSize: "14px",
+            background: "green",
+            padding: "5px 12px",
+            border: 0
+        }
+        const disabledStyle = {
+            color: "white",
+            fontSize: "14px",
+            background: "red",
+            padding: "6px 14px",
+            border: 0
+        }
 
         return (
             <div>
-                {itemLength
-                    ? (<span className='counter-item'>counter item {itemLength}</span>)
-                    : (null)
+                {!itemLength
+                    ?<button onClick={this.enableTodoList}
+                            style={stateTodo.button ? disabledStyle : enabledStyle}
+                    >
+                        {stateTodo.button ? "Hide list" : "Show list"}
+                    </button>
+                    : null
                 }
 
-                {this.state.items.map((item, index) =>
-                    <Item items={item}
-                          key={index}
-                          checkedItem={this.handleDataCallback}
-                          onHoldItems={this.onHoldItem}
-                          onDeleteItems={this.deleteItem}
+                {stateTodo.items.map((item, id) => (
+                    <Item text={item.text}
+                          key={id}
+                          id={id + 1}
+                          checkItem={this.handlerCheckedItem}
+                          deleteItemsProps={this.handlerDeleteItems}
                     />
-                )}
+                ))}
 
-                {itemLength
-                    ? (<ErrorMessage class='success' text={'write you next item'}/>)
-                    : (<ErrorMessage class='error' text={'you list is empty'}/>)
+                {stateTodo.button
+                    ? <TodoForm onSubmit={this.addItem}/>
+                    : null
                 }
 
-                <form className="contact-form" onSubmit={this.onSubmit}>
-                    <input
-                        onChange={this.onChangeWhere}
-                        placeholder={this.state.name}
-                        value={this.state.name}
-                        type="text"
-                    />
-                    <div className="btn-group">
-                        <button disabled={!this.state.name}>{!this.state.name ? 'Заблокировано' : 'Отправить'}</button>
-                    </div>
-                </form>
             </div>
         )
     }

@@ -28,9 +28,13 @@ menu {
     li {
       cursor: pointer;
 
-      &:hover {
+      a {
         color: #2096fb;
         text-decoration: underline;
+
+        &:hover {
+          text-decoration: none;
+        }
       }
 
       &.active {

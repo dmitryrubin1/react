@@ -1,0 +1,50 @@
+.create-form {
+  width: 300px;
+  position: fixed;
+  margin: 12px;
+
+  h3 {
+    margin: 12px 0 0 0;
+  }
+
+  button.add {
+    width: 100%;
+    margin-top: 12px;
+    background: #2096FB;
+    color: #fff;
+    height: 34px;
+    border: 0;
+
+    &:hover {
+      background: darken(#2096FB, 5%);
+      cursor: pointer;
+    }
+  }
+
+  button.close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    border: 0;
+    background: 0;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  li {
+    text-align: left;
+    margin-bottom: 12px;
+  }
+
+  small {
+    display: block;
+    margin: 0 10px 5px 0;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    height: 34px;
+  }
+}

@@ -1,0 +1,146 @@
+ul, li {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tour {
+  &-grid {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1024px;
+    margin: 0 auto;
+    padding: 0;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      list-style: none;
+      width: 20%;
+      height: auto;
+      margin: 20px 20px 0 0;
+      padding: 12px;
+      border: 1px solid grey;
+      border-radius: 8px;
+      box-shadow: 0 0 1px #61dafb;
+      font-size: 15px;
+      text-align: justify;
+      background: url('../../../assets/img/bali.jpg') no-repeat center;
+      background-size: cover;
+      opacity: .6;
+
+      &.active {
+        opacity: 1;
+        box-shadow: 0 0px 1px #04fbe5;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      .name {
+        text-transform: uppercase;
+        font-size: 18px;
+        margin: 8px 0 14px;
+        text-align: center;
+      }
+
+      .desc {
+        height: 204px;
+        word-wrap: break-word;
+      }
+
+      .price {
+        margin: 20px auto 4px;
+        padding: 6px;
+        text-align: center;
+        color: #282c34;
+        font: 900 30px 'Roboto';
+        background: rgba(0, 0, 0, .1);
+      }
+
+      button {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+      }
+    }
+  }
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    width: 1024px;
+    margin: 0 auto;
+    padding: 0;
+
+    li {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      height: auto;
+      margin: 20px 20px 0 0;
+      padding: 12px;
+      border: 1px solid grey;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px #61dafb;
+      font-size: 15px;
+      text-align: justify;
+
+      background: url('../../../assets/img/bali.jpg') no-repeat left;
+      background-size: 150px 100%;
+      opacity: .6;
+
+      &.active {
+        opacity: 1;
+        box-shadow: 0 0px 1px #04fbe5;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+
+      > div {
+        align-items: center;
+        margin: 0 20px 0 0;
+      }
+
+      .name {
+        min-width: 135px;
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 18px;
+        margin: 8px 0 14px 200px;
+      }
+
+      .desc {
+        height: auto;
+        word-wrap: break-word;
+        width: 525px;
+      }
+
+      .price {
+        margin: 20px auto 4px;
+        padding: 6px;
+        text-align: center;
+        color: #fff;
+        font: 900 24px 'Roboto';
+        background: rgba(0, 0, 0, .1);
+        white-space: nowrap;
+      }
+
+      button {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+
+        [disabled] {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

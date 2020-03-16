@@ -2,14 +2,14 @@ import React from 'react';
 import './header.scss';
 import ItemMenu from './Item-menu';
 
-function Header() {
-
+const Header = (props) => {
+    // console.log(props);
     return (
         <header className="header">
+            <br/>
             <menu>
                 <ul>
-                    <ItemMenu active='active' page='Home'/>
-                    <ItemMenu page='News'/>
+                    <ItemMenu page='Tours'/>
                     <ItemMenu page='Todo'/>
                 </ul>
             </menu>
