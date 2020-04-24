@@ -1,6 +1,9 @@
 import React from "react";
 import Item from "./item/item";
 import TodoForm from "./form/form";
+import {buttonStyle} from './constants.js'
+import {enabledStyle} from './constants.js'
+import {disabledStyle} from './constants.js'
 
 class Todo extends React.Component {
     constructor(props) {
@@ -18,77 +21,60 @@ class Todo extends React.Component {
         })
     }
 
+    // Todo неправильно считается массив
     addItem = (item) => {
         this.setState({
-            items: [item, ...this.state.items]
+            items: this.state.items.concat(item)
         })
+        console.log(this.state.items);
+    }
+
+    handleCheckedItem = (id) => {
+        console.log(id);
+
+        // this.setState({
+        //     items: id
+        // })
+    }
+
+    handleDeleteItems = (item) => {
+        // this.setState(prevState => ({
+        //
+        // }));
+
+        console.log(this.state.items.filter(todo => todo !== item));
         console.log(item);
     }
 
-    handlerCheckedItem = (choice) => {
-        console.log(choice);
-
-        const checkedItem = this.state.items;
-        //
-
+    clearAll = () => {
         this.setState({
-            items: checkedItem
+            items: []
         })
-
-        console.log(checkedItem);
-        console.log(this.state);
-    }
-
-    handlerDeleteItems = (item) => {
-        this.setState({
-            items: [item, ...this.state.items],
-            name: "",
-        });
     }
 
     render() {
         const stateTodo = this.state;
-        const itemLength = stateTodo.items.length;
-        const enabledStyle = {
-            color: "white",
-            fontSize: "14px",
-            background: "green",
-            padding: "5px 12px",
-            border: 0
-        }
-        const disabledStyle = {
-            color: "white",
-            fontSize: "14px",
-            background: "red",
-            padding: "6px 14px",
-            border: 0
-        }
+        // const itemLength = stateTodo.items.length;
 
         return (
             <div>
-                {!itemLength
-                    ?<button onClick={this.enableTodoList}
-                            style={stateTodo.button ? disabledStyle : enabledStyle}
-                    >
-                        {stateTodo.button ? "Hide list" : "Show list"}
-                    </button>
-                    : null
-                }
 
-                {stateTodo.items.map((item, id) => (
+                {this.state.items.map((item, id) => (
                     <Item text={item.text}
                           key={id}
                           id={id + 1}
-                          checkItem={this.handlerCheckedItem}
-                          deleteItemsProps={this.handlerDeleteItems}
+                          // TODO что такое ()=>, как это работает?
+                          isChecked={item.checked}
+                          onStatusChange={this.handleCheckedItem}
+                          deleteItemsProps={this.handleDeleteItems}
                     />
                 ))}
 
-                {stateTodo.button
-                    ? <TodoForm onSubmit={this.addItem}/>
+                    <TodoForm onSubmit={this.addItem}/>
+                {stateTodo.items.length
+                    ? <button style={buttonStyle} onClick={this.clearAll}>clear all items</button>
                     : null
                 }
-
             </div>
         )
     }

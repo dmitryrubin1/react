@@ -1,62 +1,42 @@
-import React from "react"
+import React from "react";
 import PauseIcon from "@material-ui/icons/Pause";
 import CloseIcon from "@material-ui/icons/Close";
 
-class Item extends React.Component {
+const Item = (props) => {
 
-    constructor(props) {
-        super(props)
-        console.log(this.props);
 
-        this.state = {
-            items: [],
-        }
+    const changeIt = (e) => {
+        console.log(e.target.checked, props.id)
+        props.onStatusChange(
+            {checked: e.target.checked}
+        )
     }
 
-    childrenCheckItem = item => {
-        this.props.checkItem ({
-            checked: item.target.checked
-        })
-
-
-        // here function
-        // console.log(this.props.checkItem);
-
-        // console.log(item.target.checked);
-    }
-
-
-    deleteItem = item => {
-        this.props.deleteItemsProps({
-            items: [item, ...this.state.items]
-        })
-    }
-
-    render() {
         return (
             <div>
-                <div id={this.props.id} className={"todo-item"}>
+                <div id={props.id} className={"todo-item"}>
                     <input
                         type="checkbox"
-                        onChange={this.childrenCheckItem}
-                        defaultChecked={false}
+                        onChange={changeIt}
+                        value={props.id}
+                        // checked={props.isChecked}
+                        // defaultChecked={false}
                     />
-                    {this.props.checkItem
-                        ? <span>{this.props.text}</span>
-                        : <span><strong>{this.props.text}</strong></span>
+                    {props.onStatusChange
+                        ? <span>{props.text}</span>
+                        : <span><strong>{props.text}</strong></span>
                     }
                     <div className="controls">
-                        <button onClick={this.pauseItem}>
+                        <button onClick={props.pause}>
                             <PauseIcon/>
                         </button>
-                        <button onClick={() => this.deleteItem()}>
+                        <button onClick={props.delete}>
                             <CloseIcon/>
                         </button>
                     </div>
                 </div>
             </div>
         );
-    }
 }
 
-export default Item
+export default Item;

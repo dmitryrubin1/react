@@ -1,29 +1,28 @@
 import React from "react";
+import {buttonStyle} from './../constants.js'
 
 export default class TodoForm extends React.Component {
 
-    state = {
-        item: {
+    constructor() {
+        super();
+
+        this.state = {
             text: "",
             checked: false
         }
-    };
+    }
 
     onChangeWhere = (event) => {
         this.setState({
-            item: {
-                text: event.target.value
-            }
+            text: event.target.value
         })
     }
 
     onSubmit = (event) => {
         event.preventDefault();
         this.props.onSubmit({
-            item: {
-                text: this.state.item.text,
-                checked: false
-            }
+            text: this.state.text,
+            checked: false
         });
     }
 
@@ -33,13 +32,13 @@ export default class TodoForm extends React.Component {
             <form className="contact-form" onSubmit={this.onSubmit}>
                 <input
                     onChange={this.onChangeWhere}
-                    placeholder={formState.item.text}
-                    value={formState.item.text}
-                    id={formState.item.text}
+                    placeholder={formState.text}
+                    value={formState.text}
+                    id={formState.text}
                     type="text"
                 />
                 <div className="btn-group">
-                    <button disabled={!formState.item.text}>{!formState.item.text ? "Заблокировано" : "Отправить"}</button>
+                    <button style={buttonStyle} disabled={!formState.text}>{!formState.text ? "Заблокировано" : "Отправить"}</button>
                 </div>
             </form>
         )
