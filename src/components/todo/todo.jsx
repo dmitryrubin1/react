@@ -1,9 +1,8 @@
 import React from "react";
 import Item from "./item/item";
 import TodoForm from "./form/form";
-import {buttonStyle} from './constants.js'
-import {enabledStyle} from './constants.js'
-import {disabledStyle} from './constants.js'
+import {buttonStyle} from './constants.js';
+import styles from './todo.modules.scss';
 
 class Todo extends React.Component {
     constructor(props) {
@@ -11,17 +10,9 @@ class Todo extends React.Component {
 
         this.state = {
             items: [],
-            button: false
         }
     }
 
-    enableTodoList = () => {
-        this.setState({
-            button: !this.state.button
-        })
-    }
-
-    // Todo неправильно считается массив
     addItem = (item) => {
         this.setState({
             items: this.state.items.concat(item)
@@ -32,18 +23,34 @@ class Todo extends React.Component {
     handleCheckedItem = (id) => {
         console.log(id);
 
-        // this.setState({
-        //     items: id
-        // })
+        const updateItems = this.state.items.map(item =>
+            (item.id === id ? {...item, checked: !item.checked} : item)
+        )
+
+        this.setState({
+            items: updateItems
+        })
+    }
+
+    handlePauseItem = (item) => {
+        const isOnHoldItem = this.state.items.map(i =>
+            (i.id === item ? {...i, onHold: !i.onHold} : i)
+        )
+
+        this.setState({
+            items: isOnHoldItem
+        })
+
+        console.log(this.state.items);
     }
 
     handleDeleteItems = (item) => {
-        // this.setState(prevState => ({
-        //
-        // }));
-
-        console.log(this.state.items.filter(todo => todo !== item));
-        console.log(item);
+        console.log('callback props.id', item);
+        const newItems = this.state.items.filter(n => n.id !== item);
+        this.setState({
+            items: newItems
+        })
+        // console.log(newItems);
     }
 
     clearAll = () => {
@@ -54,24 +61,28 @@ class Todo extends React.Component {
 
     render() {
         const stateTodo = this.state;
-        // const itemLength = stateTodo.items.length;
+        const itemLength = stateTodo.items.length;
 
         return (
-            <div>
-
-                {this.state.items.map((item, id) => (
+            <div id={'list'} className={styles.todoList}>
+                {itemLength
+                ? this.state.items.map((item, index) => (
                     <Item text={item.text}
-                          key={id}
-                          id={id + 1}
-                          // TODO что такое ()=>, как это работает?
-                          isChecked={item.checked}
-                          onStatusChange={this.handleCheckedItem}
+                          key={index}
+                          id={item.id}
+                          checked={item.checked}
+                          isOnHold={item.onHold}
+                          onChangeStatus={this.handleCheckedItem}
+                          pauseItemProps={this.handlePauseItem}
                           deleteItemsProps={this.handleDeleteItems}
                     />
-                ))}
+                    ))
+                : <div>Create you first item</div>
 
-                    <TodoForm onSubmit={this.addItem}/>
-                {stateTodo.items.length
+                }
+
+                 <TodoForm onSubmit={this.addItem}/>
+                {itemLength
                     ? <button style={buttonStyle} onClick={this.clearAll}>clear all items</button>
                     : null
                 }

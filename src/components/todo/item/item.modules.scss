@@ -1,0 +1,54 @@
+.todoItem{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 300px;
+  margin: 10px auto;
+  height: 40px;
+  border-radius: 4px;
+  padding: 4px 12px;
+  background: #fefafc;
+  color: #282c33;
+  line-height: 40px;
+  text-align: left;
+  border: 2px solid transparent;
+
+  &.onHold {
+    border: 2px solid burlywood;
+    background: #DECDB5;
+  }
+
+  span {
+    display: block;
+    margin-left: 10px;
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    margin-right: auto;
+    color: grey;
+
+    button {
+      display: block;
+      text-align: center;
+      line-height: 30px;
+      width: 30px;
+      height: 30px;
+      padding: 0;
+      font-size: 16px;
+      text-decoration: none;
+      color: #1f3330;
+
+
+      &:hover {
+        cursor: pointer;
+        color: #282c33;
+      }
+    }
+  }
+}

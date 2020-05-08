@@ -84,21 +84,41 @@ class CreateTour extends React.Component {
                     <ul>
                         <li>
                             <small>id ticket</small>
-                            <input value={this.state.id} onChange={this.handleChangeId} placeholder={'id'} type="text"/>
+                            <input value={this.state.id}
+                                   onChange={this.handleChangeId}
+                                   placeholder={'id'}
+                                   type="text"
+                            />
                         </li>
                         <li>
                             <small>name</small>
-                            <input value={this.state.name} onChange={this.handleChangeName} placeholder={'name'} type="text"/>
+                            <input value={this.state.name}
+                                   onChange={this.handleChangeName}
+                                   placeholder={'name'}
+                                   type="text"
+                            />
                         </li>
                         <li>
                             <small>description</small>
-                            <textarea value={this.state.description} onChange={this.handleChangeDescription} placeholder={'description'} type="text"/>
+                            <textarea value={this.state.description}
+                                      onChange={this.handleChangeDescription}
+                                      placeholder={'description'}
+                                      type="text"
+                            />
                         </li>
                         <li>
                             <small>price</small>
-                            <input value={this.state.price} onChange={this.handleChangePrice} placeholder={'price'} type="number" />
+                            <input value={this.state.price}
+                                   onChange={this.handleChangePrice}
+                                   placeholder={'price'}
+                                   type="number"
+                            />
                         </li>
-                        <input onChange={this.handleChangeActive} checked={this.state.isActive} value={this.state.isActive} type="checkbox"/>
+                        <input onChange={this.handleChangeActive}
+                               checked={this.state.isActive}
+                               value={this.state.isActive}
+                               type="checkbox"
+                        />
                     </ul>
                     <button disabled={!this.state} onClick={this.submitTour} className={'add'}>
                         add tour

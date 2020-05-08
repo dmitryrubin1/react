@@ -1,5 +1,6 @@
 import React from "react";
 import {buttonStyle} from './../constants.js'
+import shortid from 'shortid';
 
 export default class TodoForm extends React.Component {
 
@@ -8,9 +9,12 @@ export default class TodoForm extends React.Component {
 
         this.state = {
             text: "",
-            checked: false
+            id: 0,
+            checked: false,
+            onHold: false
         }
     }
+
 
     onChangeWhere = (event) => {
         this.setState({
@@ -22,7 +26,10 @@ export default class TodoForm extends React.Component {
         event.preventDefault();
         this.props.onSubmit({
             text: this.state.text,
-            checked: false
+            id: shortid.generate(),
+            checked: false,
+            onHold: false
+
         });
     }
 
@@ -34,7 +41,6 @@ export default class TodoForm extends React.Component {
                     onChange={this.onChangeWhere}
                     placeholder={formState.text}
                     value={formState.text}
-                    id={formState.text}
                     type="text"
                 />
                 <div className="btn-group">

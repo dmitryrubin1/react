@@ -9,6 +9,7 @@ const Header = (props) => {
             <br/>
             <menu>
                 <ul>
+                    <ItemMenu page='New-todo'/>
                     <ItemMenu page='Tours'/>
                     <ItemMenu page='Todo'/>
                 </ul>
