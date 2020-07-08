@@ -1,0 +1,43 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .divider {
+    height: 1px;
+    width: 100%;
+    margin: 0 auto 12px auto;
+    background: #959595;
+  }
+
+  input {
+    width: 300px;
+    margin: 10px auto;
+    height: 40px;
+    border-radius: 4px;
+    padding: 4px 12px;
+    background: #fefafc;
+    color: #282c33;
+    line-height: 40px;
+    text-align: left;
+    border: 2px solid transparent;
+  }
+
+  button {
+    display: block;
+    color: #2F8FFC;
+    width: 120px;
+    height: 48px;
+    border: 1px solid #2F8FFC;
+    border-radius: 8px;
+    margin: 0 auto 12px;
+    text-transForm: capitalize;
+
+    &:hover {
+      color: darken(#2f8ffc, 5%);
+      border-color: darken(#2f8ffc, 5%);
+      background: rgba(#2f8ffc, .07);
+      cursor: pointer;
+    }
+   }
+}

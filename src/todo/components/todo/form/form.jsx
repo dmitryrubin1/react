@@ -1,11 +1,11 @@
 import React from "react";
-import {buttonStyle} from './../constants.js'
 import shortid from 'shortid';
+import style from './form.module.scss'
 
 export default class TodoForm extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             text: "",
@@ -14,7 +14,6 @@ export default class TodoForm extends React.Component {
             onHold: false
         }
     }
-
 
     onChangeWhere = (event) => {
         this.setState({
@@ -31,20 +30,35 @@ export default class TodoForm extends React.Component {
             onHold: false
 
         });
+        this.setState({
+            text: ''
+        });
+    }
+
+    onClear = (event) => {
+        event.preventDefault();
+        this.props.onClear({
+            items: []
+        })
     }
 
     render() {
         const formState = this.state;
         return (
-            <form className="contact-form" onSubmit={this.onSubmit}>
+            <form className={style.form} onSubmit={this.onSubmit}>
+                <div className={style.divider}></div>
                 <input
                     onChange={this.onChangeWhere}
-                    placeholder={formState.text}
+                    placeholder={'Add more'}
                     value={formState.text}
                     type="text"
                 />
                 <div className="btn-group">
-                    <button style={buttonStyle} disabled={!formState.text}>{!formState.text ? "Заблокировано" : "Отправить"}</button>
+                    <button disabled={!formState.text}>{!formState.text ? "Blocked" : "Send"}</button>
+                    {this.props.isItemLength
+                        ?<button onClick={this.onClear}>Delete {this.props.isItemLength}</button>
+                        : null
+                    }
                 </div>
             </form>
         )

@@ -1,5 +1,5 @@
 import React from 'react';
-import TourItem from '../tours/tour-item/TourItem'
+import TourItem from './tour-item/TourItem'
 import './Tours.scss'
 import {bali} from './../../assets/img/bali.jpg';
 import Notification from "./notification/notification";
